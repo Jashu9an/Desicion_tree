@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from six import StringIO
 from IPython.display import Image
 import pydotplus
+from supertree import SuperTree
 
 from dicts import MAIN_DICT
 
@@ -33,6 +34,9 @@ y_train = df_transposed.index
 clf = DecisionTreeClassifier()
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_train)
+
+tree = SuperTree(clf, feature_names=list(X_train), target_names=list(y_train))
+tree.save_html("./decision_tree.html")
 
 # accuracy = clf.score(X_train, y_train)
 # print(f'Accuracy: {accuracy*100:.2f}%')
